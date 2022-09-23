@@ -1,0 +1,6 @@
+{
+ 	"optuna_output_dir": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/Optuna_Outputs/Optuna_Journal_Paper_Jun_20_2022/optuna_baseline_seresnext50_May_19_2022/",
+    "cv_folds": 5,
+    "study_name": "optuna_best_params_foldX_optuna_baseline",
+    "legend_model": "seresnext-baseline"
+}

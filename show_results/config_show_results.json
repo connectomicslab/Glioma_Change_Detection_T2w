@@ -1,0 +1,28 @@
+{
+ 	"cv_folds": 5,
+	"plot_with_standard_deviation": "False",
+
+    "output_dir_vgg_baseline": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/Journal_Paper_June_2022/baseline_after_optuna_customVGG_May_03_2022_10h/",
+	"legend_label_vgg_baseline": "VGG-Baseline",
+
+	"output_dir_vgg_transfer_learning": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/Journal_Paper_June_2022/transfer_learning_after_optuna_customVGG_May_17_2022_14h/",
+	"legend_label_vgg_transfer_learning": "VGG-TL",
+
+	"output_dir_seresnext_baseline": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/Journal_Paper_June_2022/baseline_after_optuna_seresnext50_May_20_2022_14h/",
+	"legend_label_seresnext_baseline": "SEResNeXt-Baseline",
+
+	"output_dir_seresnext_transfer_learning": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/Journal_Paper_June_2022/transfer_learning_after_optuna_seresnext50_Jun_12_2022_12h/",
+	"legend_label_seresnext_transfer_learning": "SEResNeXt-TL",
+
+	"output_dir_vgg_baseline_brats_inference": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/inference_brats_load_baseline_customVGG_Sep_06_2022_11h",
+	"legend_label_vgg_baseline_brats_inference": "VGG-Baseline-BraTS",
+
+	"output_dir_vgg_transfer_learning_brats_inference": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/inference_brats_load_TL_customVGG_Sep_06_2022_11h",
+	"legend_label_vgg_transfer_learning_brats_inference": "VGG-TL-BraTS",
+
+	"output_dir_seresnext_baseline_brats_inference": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/inference_brats_load_baseline_seresnext50_Sep_06_2022_11h",
+	"legend_label_seresnext_baseline_brats_inference": "SEResNeXt-Baseline-BraTS",
+
+	"output_dir_seresnext_transfer_learning_brats_inference": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/inference_brats_load_TL_seresnext50_Sep_06_2022_11h",
+	"legend_label_seresnext_transfer_learning_brats_inference": "SEResNeXt-TL-BraTS"
+}
