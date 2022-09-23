@@ -1,0 +1,21 @@
+{
+	"fold_to_do": 4,
+	"network": "customVGG",
+	"df_comparative_dates_path": "/path/to/extra_files/df_dates_and_t2_labels_wad_above_0_75.csv",
+	"input_dir": "/path/to/T2_difference_maps/out_Mar_24_2022_automatic_labels_also_manual_subs",
+	"out_dir": "/path/to/classification_out_dir/",
+	"path_to_output_baseline_dir": "/path/to/output_dir_baseline/",
+
+ 	"batch_size": 4,
+	"nb_epochs": 60,
+ 	"learning_rate": 1e-5,
+	"val_interval": 1,
+	"binary_classification": "True",
+	"annotation_type": "automatic",	
+	"legend_label": "pretrain_aad_above_0_75",
+	"class_weights": [0.4, 0.6],	
+	"nb_annotators": 0,
+	"percentage_val_subs": 0.25,
+	"ext_cv_folds": 5,
+	"patience": 10
+}
