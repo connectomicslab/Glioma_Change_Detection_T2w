@@ -55,7 +55,7 @@ we will load weights from the model trained on it. In turn, to perform pre-train
 from pre-training all validation and test patients that were used for the Baseline. The configuration files to run pre-training are located inside the [pretrain_wad](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/pretrain_wad) directory. In the config file of the pre-training script, we will need
 to specify `path_to_output_baseline_dir` which is exactly the output directory where we saved results of the Baseline experiment. Once the Baseline experiments
 have been run, we can launch pre-training. If you want to skip pre-training, we also provide the weights of the four pre-trained models which are inside the
-directory `extra_files`. In this case, you can skip directly to section **Transfer-Learning (cross-validation fold 1)**. If instead you want to re-run pretraining,
+directory [pretraining](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/pretraining). In this case, you can skip directly to section [Transfer-Learning (cross-validation fold 1)](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/edit/master/README.md#transfer-learning-cross-validation-fold-1). If instead you want to re-run pretraining,
 keep on reading here. Two separate pre-trainings have to be run, one for the WAD dataset with the report classifier probability > 0.75 and one for the WAD dataset
 with the report classifier probability > 0.95 (see hyperparameter fraction_of_WAD in the paper for more details). For instance, if we want to run the pre-training
 for WAD > 0.75 (again for each fold separately):
