@@ -15,8 +15,7 @@ You can find the data used for this project at www.smth.com
 1) Clone the repository
 2) Create a conda environment using the `environment.yml` file located inside the `install` directory. If you are not familiar with conda environments, 
 please check out the [official documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). Alternatively,
-feel free to use your favorite [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) such as
-[PyCharm](https://www.jetbrains.com/pycharm/download/#section=linux) or [Visual Studio](https://visualstudio.microsoft.com/downloads/) to set up the environment.
+feel free to use your favorite [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) such as [PyCharm](https://www.jetbrains.com/pycharm/download/#section=linux) or [Visual Studio](https://visualstudio.microsoft.com/downloads/) to set up the environment.
 
 ## How to run python scripts
 All scripts in this project are run with json configuration files and the [argparse](https://docs.python.org/3/library/argparse.html) package. If you're not familiar with this, please refer to [this guide](https://towardsdatascience.com/three-ways-to-parse-arguments-in-your-python-code-aba092e8ad73) (or similar ones).
@@ -25,15 +24,12 @@ All scripts in this project are run with json configuration files and the [argpa
 Most scripts in this project require you to have a GPU, with at least 4 GB of VRAM.
 
 ## 1) Optuna hypertuning
-In order to find the best hyperparameters to use in the final classification, we first run hypertuning via [Optuna](https://optuna.org/).
-As explained in the paper, we ran 4 experiments: VGG-Baseline, VGG-Transfer-Learning, SEResNeXt-Baseline, and SEResNeXt-Transfer-Learning.
-The scripts used to find the best hyperparameters with Optuna are `classify_T2w_diffmaps_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and
-`classify_T2w_diffmaps_optuna_transfer_learning.py` (for VGG-Transfer-Learning and SEResNeXt-Transfer-Learning). Both scripts are located inside the
+In order to find the best hyperparameters to use in the final classification, we first run hypertuning via [Optuna](https://optuna.org/). As explained in the paper, we ran 4 experiments: VGG-Baseline, VGG-Transfer-Learning, SEResNeXt-Baseline, and SEResNeXt-Transfer-Learning. The scripts used to find the best hyperparameters with Optuna are `classify_T2w_diffmaps_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and `classify_T2w_diffmaps_optuna_transfer_learning.py` (for VGG-Transfer-Learning and SEResNeXt-Transfer-Learning). Both scripts are located inside the
 [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The configuration files needed to run the hyperparameter search with Optuna can be found inside the [optuna_hypertuning](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/optuna_hypertuning) directory. Let's start by looking how to run the Baseline experiments.
+
 ### 1.1) Baseline
-The Baseline experiments are the ones for which we only use the Human-Annotated Dataset (**HAD** in the paper). Since every
-cross-validation fold is computationally intensive, we run each fold independently.
-Thus, for each of the five cross-validation folds, we must run:
+The Baseline experiments are the ones for which we only use the Human-Annotated Dataset (**HAD** in the paper). Since every cross-validation fold is computationally intensive, we run each fold independently. Thus, for each of the five cross-validation folds, we must run:
+
 #### Optuna Baseline (cross-validation fold 1)
 ```python
 classify_T2w_diffmaps_optuna_baseline.py --config config_files_train_and_inf/optuna_hypertuning/optuna_baseline_f1.json
@@ -45,20 +41,12 @@ classify_T2w_diffmaps_optuna_baseline.py --config config_files_train_and_inf/opt
 #### and so on for folds 3, 4, and 5 (each time, change the config file accordingly)
 
 ---
-Please be aware that the 5 cross-validation folds must be run twice: once for the VGG model setting the argument `network` (inside the config file) to `"customVGG"`,
-and once for the SEResNeXt model, changing the argument `network` to `"seresnext50"`.
+Please be aware that the 5 cross-validation folds must be run twice: once for the VGG model setting the argument `network` (inside the config file) to `"customVGG"`, and once for the SEResNeXt model, changing the argument `network` to `"seresnext50"`.
 
 ### 1.2) Transfer Learning (TL)
-The TL experiments are the ones for which we use both the Human-Annotated Dataset (**HAD** in the paper) and the Weakly-Annotated Dataset (**WAD** in the paper).
-If we want to carry out the TL experiments, we must first run pre-training on **WAD**, because in some TL configurations (fine-tuning and feature extracting)
-we will load weights from the model trained on it. In turn, to perform pre-training, we must have first run the Baseline experiments because we want to exclude
-from pre-training all validation and test patients that were used for the Baseline. The configuration files to run pre-training are located inside the [pretrain_wad](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/pretrain_wad) directory. In the config file of the pre-training script, we will need
-to specify `path_to_output_baseline_dir` which is exactly the output directory where we saved results of the Baseline experiment. Once the Baseline experiments
-have been run, we can launch pre-training. If you want to skip pre-training, we also provide the weights of the four pre-trained models which are inside the
-directory [pretraining](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/pretraining). In this case, you can skip directly to section [Transfer-Learning (cross-validation fold 1)](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/edit/master/README.md#transfer-learning-cross-validation-fold-1). If instead you want to re-run pretraining,
-keep on reading here. Two separate pre-trainings have to be run, one for the WAD dataset with the report classifier probability > 0.75 and one for the WAD dataset
-with the report classifier probability > 0.95 (see hyperparameter fraction_of_WAD in the paper for more details). For instance, if we want to run the pre-training
+The TL experiments are the ones for which we use both the Human-Annotated Dataset (**HAD** in the paper) and the Weakly-Annotated Dataset (**WAD** in the paper). If we want to carry out the TL experiments, we must first run pre-training on **WAD**, because in some TL configurations (fine-tuning and feature extracting) we will load weights from the model trained on it. In turn, to perform pre-training, we must have first run the Baseline experiments because we want to exclude from pre-training all validation and test patients that were used for the Baseline. The configuration files to run pre-training are located inside the [pretrain_wad](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/pretrain_wad) directory. In the config file of the pre-training script, we will need to specify `path_to_output_baseline_dir` which is exactly the output directory where we saved results of the Baseline experiment. Once the Baseline experiments have been run, we can launch pre-training. If you want to skip pre-training, we also provide the weights of the four pre-trained models which are inside the directory [pretraining](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/pretraining). In this case, you can skip directly to section [Transfer-Learning (cross-validation fold 1)](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/edit/master/README.md#transfer-learning-cross-validation-fold-1). If instead you want to re-run pretraining, keep on reading here. Two separate pre-trainings have to be run, one for the WAD dataset with the report classifier probability > 0.75 and one for the WAD dataset with the report classifier probability > 0.95 (see hyperparameter fraction_of_WAD in the paper for more details). For instance, if we want to run the pre-training
 for WAD > 0.75 (again for each fold separately):
+
 #### Pre-training WAD > 0.75 (cross-validation fold 1)
 ```python
 classify_T2w_diffmaps_pretrain.py --config config_files_train_and_inf/pretrain_wad/pretrain_wad_above_0_75_f1.json
