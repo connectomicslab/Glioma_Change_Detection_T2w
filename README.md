@@ -94,13 +94,14 @@ directories should be named:
 * `optuna_transfer_learning_seresnext50_MM_DD_YYYY`
 
 To run the final inference, we can use the scripts `classify_T2w_diffmaps_after_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and 
-`classify_T2w_diffmaps_after_optuna_transfer_learning.py` (for VGG-TL and SEResNeXt-TL). These scripts are located inside the [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. 
+`classify_T2w_diffmaps_after_optuna_transfer_learning.py` (for VGG-TL and SEResNeXt-TL). These scripts are located inside the [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The configuration files for the final training/inference are located inside the [after_optuna](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/after_optuna) directory
 ### 2.1) Baseline
 For the Baseline experiment, we'd run (again for each cross-validation fold):
 ```python
 classify_T2w_diffmaps_after_optuna_baseline.py --config config_files_train_and_inf/after_optuna/config_t2_difference_baseline_after_optuna_f1.json
 ```
 #### and so on for folds 2, 3, 4, and 5 (each time, change the config file accordingly)
+As usual, you must run the 5 folds both for the VGG model (setting the argument `network` to `"customVGG"`) and for the SEResNeXt model (setting the argument `network` to `"seresnext50"`)
 
 ### 2.1) Transfer-Learning (TL)
 For the TL experiment, we'd run (again for each cross-validation fold):
@@ -108,6 +109,6 @@ For the TL experiment, we'd run (again for each cross-validation fold):
 classify_T2w_diffmaps_after_optuna_transfer_learning.py --config config_files_train_and_inf/after_optuna/config_t2_difference_tl_after_optuna_f1.json
 ```
 #### and so on for folds 2, 3, 4, and 5 (each time, change the config file accordingly)
-
+As usual, you must run the 5 folds both for the VGG model (setting the argument `network` to `"customVGG"`) and for the SEResNeXt model (setting the argument `network` to `"seresnext50"`)
 
 ## 3) Inference on longitudinal BraTS-2015
