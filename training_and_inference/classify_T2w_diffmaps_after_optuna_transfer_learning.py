@@ -272,12 +272,13 @@ def main():
     config_dict = load_config_file()  # load input config file with argparser
 
     # extract training args
+    fold_to_do = config_dict['fold_to_do']
+    network = config_dict['network']
+    assert network in ("customVGG", "seresnext50"), "Only 'customVGG' and 'seresnext50' are allowed: found '{}' instead".format(network)
     batch_size = config_dict['batch_size']  # batch size used during training
     ext_cv_folds = config_dict['ext_cv_folds']  # number of external cross validation folds
-    fold_to_do = config_dict['fold_to_do']
     nb_epochs = config_dict['nb_epochs']  # number of training epochs
     val_interval = config_dict['val_interval']  # epoch frequency with which we print/save validation metrics
-    network = config_dict['network']
     binary_classification = str2bool(config_dict['binary_classification'])  # type: bool # whether to perform binary classification or not
     annotation_type = config_dict['annotation_type']  # type: str # used to distinguish between the two annotation schemes (manual and automatic)
     legend_label = config_dict['legend_label']  # type: str # label to use in the legend of figures
