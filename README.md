@@ -1,5 +1,9 @@
 # "Transfer learning with weak labels from radiology reports: application to glioma change detection"
 
+<p float="middle">
+  <img src="https://github.com/connectomicslab/Glioma_Change_Detection_T2w/blob/master/figures/t2w_difference_maps_four_cases_Jul_22_2022.png" />
+</p>
+
 
 This repository contains the code used for the [paper](add_link): 
 "Transfer learning with weak labels from radiology reports: application to glioma change detection". 
