@@ -8,17 +8,18 @@ __email__ = "tommydino@hotmail.it"
 __status__ = "Prototype"
 
 
-def get_parser():
+def get_parser() -> argparse.ArgumentParser:
     """This function creates a parser for handling input arguments"""
-    p = argparse.ArgumentParser(description='Aneurysm_Net')
+    p = argparse.ArgumentParser()  # type: argparse.ArgumentParser
+    # add argument to config file
     p.add_argument('--config', type=str, required=True, help='Path to json configuration file.')
     return p
 
 
-def load_config_file():
+def load_config_file() -> dict:
     """This function loads the input config file
     Returns:
-        config_dictionary (dict): it contains the input arguments
+        config_dictionary: it contains the input arguments
     """
     parser = get_parser()  # create parser
     args = parser.parse_args()  # convert argument strings to objects
