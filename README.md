@@ -18,10 +18,10 @@ please check out the [official documentation](https://docs.conda.io/projects/con
 feel free to use your favorite [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) such as
 [PyCharm](https://www.jetbrains.com/pycharm/download/#section=linux) or [Visual Studio](https://visualstudio.microsoft.com/downloads/) to set up the environment.
 
-# How to run python script
+## How to run python script
 All scripts in this project are run with json configuration files and the [argparse](https://docs.python.org/3/library/argparse.html) package. If you're not familiar with this, please refer to [this guide](https://towardsdatascience.com/three-ways-to-parse-arguments-in-your-python-code-aba092e8ad73) (or similar ones)
 
-# GPU needed!
+## GPU needed!
 Most scripts in this project require you to have a GPU, with at least 4 GB of VRAM.
 
 ## 1) Optuna hypertuning
@@ -29,7 +29,7 @@ In order to find the best hyperparameters to use in the final classification, we
 As explained in the paper, we ran 4 experiments: VGG-Baseline, VGG-Transfer-Learning, SEResNeXt-Baseline, and SEResNeXt-Transfer-Learning.
 The scripts used to find the best hyperparameters with optuna are `classify_T2w_diffmaps_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and
 `classify_T2w_diffmaps_optuna_transfer_learning.py` (for VGG-Transfer-Learning and SEResNeXt-Transfer-Learning). Both scripts are located inside the
-`training_and_inference` directory. Let's start by looking how to run the Baseline experiments.
+`training_and_inference` directory. The configuration files needed to run the hyperparameter search with Optuna can be found inside the [optuna_hypertuning](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/optuna_hypertuning) directory. Let's start by looking how to run the Baseline experiments.
 ### 1.1) Baseline
 The Baseline experiments are the ones for which we only use the Human-Annotated Dataset (**HAD** in the paper). Since every
 cross-validation fold is computationally intensive, we run each fold independently.
