@@ -6,9 +6,7 @@
 
 
 This repository contains the code used for the [paper](add_link): 
-"Transfer learning with weak labels from radiology reports: application to glioma change detection". 
-
-Please cite the paper if you are using either our longitudinal BRATS-2015 dataset or code.
+"Transfer learning with weak labels from radiology reports: application to glioma change detection". Please cite the paper if you are using either our code or labeled BRATS-2015 dataset.
 
 ## Data
 You can find the data used for this project at www.smth.com
@@ -19,6 +17,12 @@ You can find the data used for this project at www.smth.com
 please check out the [official documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). Alternatively,
 feel free to use your favorite [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) such as
 [PyCharm](https://www.jetbrains.com/pycharm/download/#section=linux) or [Visual Studio](https://visualstudio.microsoft.com/downloads/) to set up the environment.
+
+# How to run python script
+All scripts in this project are run with json configuration files and the [argparse](https://docs.python.org/3/library/argparse.html) package. If you're not familiar with this, please refer to [this guide](https://towardsdatascience.com/three-ways-to-parse-arguments-in-your-python-code-aba092e8ad73) (or similar ones)
+
+# GPU needed!
+Most scripts in this project require you to have a GPU, with at least 4 GB of VRAM.
 
 ## 1) Optuna hypertuning
 In order to find the best hyperparameters to use in the final classification, we first run hypertuning via [Optuna](https://optuna.org/).
