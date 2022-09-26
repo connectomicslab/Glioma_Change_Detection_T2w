@@ -152,9 +152,12 @@ def main():
     config_dict = load_config_file()  # load input config file with argparser
 
     # extract training args
-    batch_size = config_dict['batch_size']  # batch size used during training
     network = config_dict['network']
+    assert network in ("customVGG", "seresnext50"), "Only 'customVGG' and 'seresnext50' are allowed: found '{}' instead".format(network)
     experiment = config_dict['experiment']
+    assert experiment in ("baseline", "transfer_learning"), "Only 'baseline' and 'transfer_learning' are allowed: found {} instead".format(experiment)
+
+    batch_size = config_dict['batch_size']  # batch size used during training
     annotation_type = config_dict['annotation_type']  # type: str # used to distinguish between the two annotation schemes (manual and automatic)
     legend_label = config_dict['legend_label']  # type: str # label to use in the legend of figures
     legend_label = legend_label.replace("EXPERIMENT", "{}".format(experiment))
@@ -167,6 +170,7 @@ def main():
     path_dir_previous_training = config_dict['path_dir_previous_training']
     path_dir_previous_training = path_dir_previous_training.replace("EXPERIMENT", "{}".format(experiment))
     path_dir_previous_training = path_dir_previous_training.replace("NETWORK", "{}".format(network))
+    assert os.path.exists(path_dir_previous_training), "Path {} does not exist".format(path_dir_previous_training)
     
     # set number of jobs to run in parallel
     on_hpc_cluster = getpass.getuser() in ['to5743']  # type: bool # check if user is in list of authorized users
