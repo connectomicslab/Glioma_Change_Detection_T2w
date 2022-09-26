@@ -24,7 +24,7 @@ All scripts in this project are run with json configuration files and the [argpa
 Most scripts in this project require you to have a GPU, with at least 4 GB of VRAM.
 
 # 1) Optuna hypertuning
-In order to find the best hyperparameters to use in the final classification, we first run hypertuning via [Optuna](https://optuna.org/). As explained in the paper, we ran 4 experiments: VGG-Baseline, VGG-Transfer-Learning, SEResNeXt-Baseline, and SEResNeXt-Transfer-Learning. The scripts used to find the best hyperparameters with Optuna are `classify_T2w_diffmaps_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and `classify_T2w_diffmaps_optuna_transfer_learning.py` (for VGG-Transfer-Learning and SEResNeXt-Transfer-Learning). Both scripts are located inside the
+In order to find the best hyperparameters to use in the final classification, we first run hypertuning via [Optuna](https://optuna.org/). This is the most time-consuming step. If you want to skip this step, you can already go to [Training/Inference AFTER Optuna](https://github.com/connectomicslab/Glioma_Change_Detection_T2w#2-traininginference-after-optuna). If instead you want to re-run hypertune, keep on reading here. As explained in the paper, we ran 4 experiments: VGG-Baseline, VGG-Transfer-Learning, SEResNeXt-Baseline, and SEResNeXt-Transfer-Learning. The scripts used to find the best hyperparameters with Optuna are `classify_T2w_diffmaps_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and `classify_T2w_diffmaps_optuna_transfer_learning.py` (for VGG-Transfer-Learning and SEResNeXt-Transfer-Learning). Both scripts are located inside the
 [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The configuration files needed to run the hyperparameter search with Optuna (both for the Baseline and the Transfer Learning experiments) can be found inside the [optuna_hypertuning](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/optuna_hypertuning) directory. Let's start by looking how to run the Baseline experiments.
 
 ### 1.1) Baseline
@@ -85,9 +85,8 @@ to run the TL experiments for the SEResNeXt model, we have to set `network` to `
 set to `Apr_19_2022` for the VGG and to `May_23_2022` for the SEResNeXt.
 
 # 2) Training/Inference AFTER Optuna
-Once the best hyperparameters have been found with Optuna, we can finally run the last training/inference to obtain classification results. The best
-hyperparameters have been saved in the `optuna_output_dir` directory that was specified in the config files of the Optuna experiments. These output
-directories should be named:
+Once the best hyperparameters have been found with Optuna, we can finally run the last training/inference to obtain classification results.
+If you used the optuna output directories already provided by us, you can find them inside [optuna_output_dirs](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/optuna_output_dirs). If instead you ran hypertuning yourself, you should have some Optuna output directories saved in the `optuna_output_dir` directory that you specified in the config files of the Optuna experiments. These output directories should be named:
 * `optuna_baseline_customVGG_MM_DD_YYYY`
 * `optuna_baseline_seresnext50_MM_DD_YYYY`
 * `optuna_transfer_learning_customVGG_MM_DD_YYYY`
