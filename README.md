@@ -71,7 +71,7 @@ After running the two pre-training scripts (WAD > 0.75, and WAD > 0.95), 4 direc
  * `pretrain_aad_above_0_95_seresnext50_le_1e-05_MM_DD_YYYY`
 
 In the config files of the optuna TL experiments, make sure to set the argument `date_of_pretrain` to the `MM_DD_YYYY` of the pre-training output directories.
-**N.B.** the dates for the same network should be the same (e.g. we expect the same date for `pretrain_aad_above_0_75_customVGG` and
+**N.B.** the dates for the same network should be identical (e.g. we expect the same date for `pretrain_aad_above_0_75_customVGG` and
 `pretrain_aad_above_0_95_customVGG`). Then, as for the other experiments, we must run each cross-validation fold separately with:
 #### Transfer-Learning (cross-validation fold 1)
 ```python
