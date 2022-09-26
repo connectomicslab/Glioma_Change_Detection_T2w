@@ -112,4 +112,12 @@ classify_T2w_diffmaps_after_optuna_transfer_learning.py --config config_files_tr
 As usual, you must run the 5 folds both for the VGG model (setting the argument `network` to `"customVGG"`) and for the SEResNeXt model (setting the argument `network` to `"seresnext50"`)
 
 # 3) Inference on longitudinal BraTS-2015
-To assess model generalizability, we also ran inference on some longitudinal subjects from BraTS-2015. To replicate this experiment, you can use the script `inference_longitudinal_brats_tcia_subs.py` located inside the [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The config file to use is `config_inference_brats_tcia.json` that is located inside the [brats_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/brats_inference) directory
+To assess model generalizability, we also ran inference on some longitudinal subjects from the BraTS-2015 dataset. To replicate this experiment, you can use the script `inference_longitudinal_brats_tcia_subs.py` located inside the [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The config file to use is `config_inference_brats_tcia.json` that is located inside the [brats_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/brats_inference) directory. To perform inference on the BraTS patients, you must run:
+```python
+inference_longitudinal_brats_tcia_subs.py --config config_files_train_and_inf/brats_inference/config_inference_brats_tcia.json
+```
+There are two important arguments that you should change inside `config_inference_brats_tcia.json` which are `network` and `experiment`, depending on which model you want to use for inferece: 
+* if you want to use the VGG-Baseline model, set `network` to `"customVGG"` and `experiment` to `"baseline"`
+* if you want to use the VGG-TL model, set `network` to `"customVGG"` and `experiment` to `"transfer_learning"`
+* if you want to use the SEResNeXt-Baseline model, set `network` to `"seresnext50"` and `experiment` to `"baseline"`
+* if you want to use the SEResNeXt-TL model, set `network` to `"seresnext50"` and `experiment` to `"transfer_learning"`
