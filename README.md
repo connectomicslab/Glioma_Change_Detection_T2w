@@ -81,7 +81,7 @@ classify_T2w_diffmaps_optuna_transfer_learning.py --config config_files_train_an
 
 As for the Baseline, if we want to run the TL experiments for the VGG model, we have to set the argument `network` to `"customVGG"`, while if we want
 to run the TL experiments for the SEResNeXt model, we have to set `network` to `"seresnext50"` inside the config files. Also, make sure to set the correct
-`date_of_pretrain` argument. If using the already-computed pre-training directories (those in the `extra_files` directory), `date_of_pretrain` should be
+`date_of_pretrain` argument. If using the already-computed pre-training directories (those in the [pretraining](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/pretraining) directory), `date_of_pretrain` should be
 set to `Apr_19_2022` for the VGG and to `May_23_2022` for the SEResNeXt.
 
 ## 2) Training/Inference AFTER Optuna
