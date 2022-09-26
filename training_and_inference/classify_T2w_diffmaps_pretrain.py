@@ -156,12 +156,18 @@ def main():
     config_dict = load_config_file()  # load input config file with argparser
 
     # extract training args
-    batch_size = config_dict['batch_size']  # batch size used during training
     fold_to_do = config_dict['fold_to_do']
+    network = config_dict['network']
+    assert network in ("customVGG", "seresnext50"), "Only 'customVGG' and 'seresnext50' are allowed: found '{}' instead".format(network)
+    df_comparative_dates_path = config_dict['df_comparative_dates_path']  # path to dataframe containing comparative dates and reports
+    input_dir = config_dict['input_dir']  # path to folder containing volume differences
+    out_dir = config_dict['out_dir']  # path where we save model parameters
+    path_to_output_baseline_dir = config_dict['path_to_output_baseline_dir']
+
+    batch_size = config_dict['batch_size']  # batch size used during training
     nb_epochs = config_dict['nb_epochs']  # number of training epochs
     learning_rate = config_dict['learning_rate']  # learning rate used during training
     val_interval = config_dict['val_interval']  # epoch frequency with which we print/save validation metrics
-    network = config_dict['network']
     binary_classification = str2bool(config_dict['binary_classification'])  # type: bool # whether to perform binary classification or not
     annotation_type = config_dict['annotation_type']  # type: str # used to distinguish between the two annotation schemes (manual and automatic)
     legend_label = config_dict['legend_label']  # type: str # label to use in the legend of figures
@@ -170,11 +176,6 @@ def main():
     percentage_val_subs = config_dict['percentage_val_subs']  # type: float
     ext_cv_folds = config_dict['ext_cv_folds']
     patience = config_dict['patience']
-
-    df_comparative_dates_path = config_dict['df_comparative_dates_path']  # path to dataframe containing comparative dates and reports
-    input_dir = config_dict['input_dir']  # path to folder containing volume differences
-    out_dir = config_dict['out_dir']  # path where we save model parameters
-    path_to_output_baseline_dir = config_dict['path_to_output_baseline_dir']
 
     # set number of jobs to run in parallel
     on_hpc_cluster = getpass.getuser() in ['to5743']  # type: bool # check if user is in list of authorized users
