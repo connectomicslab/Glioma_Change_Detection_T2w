@@ -52,8 +52,7 @@ for WAD > 0.75 (again for each fold separately):
 classify_T2w_diffmaps_pretrain.py --config config_files_train_and_inf/pretrain_wad/pretrain_wad_above_0_75_f1.json
 ```
 #### and so on for folds 2, 3, 4, and 5 (each time, change the config file accordingly)
-As for the Baseline experiments, to run the 5 pre-training folds for the VGG model we must set the argument `network` as `"customVGG"`, while to run
-pre-training for the SEResNeXt model, we must set the argument `network` as `"seresnext50"`.
+As for the Baseline experiments, you must run the 5 pre-training folds for the VGG model (setting the argument `network` to `"customVGG"`) and for the SEResNeXt model (setting the argument `network` to `"seresnext50"`).
 
 ---
 
