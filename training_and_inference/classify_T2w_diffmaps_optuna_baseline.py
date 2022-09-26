@@ -325,6 +325,7 @@ def main():
     # extract training args
     fold_to_do = config_dict['fold_to_do']
     network = config_dict['network']
+    assert network in ("customVGG", "seresnext50"), "Only 'customVGG' and 'seresnext50' are allowed: found '{}' instead".format(network)
     df_dates_and_labels_had = config_dict['df_dates_and_labels_had']  # path to dataframe containing comparative dates and reports
     input_dir = config_dict['input_dir']  # path to folder containing volume differences
     out_dir = config_dict['out_dir']  # path where we save model parameters
