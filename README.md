@@ -86,7 +86,7 @@ set to `Apr_19_2022` for the VGG and to `May_23_2022` for the SEResNeXt.
 
 # 2) Training/Inference AFTER Optuna
 Once the best hyperparameters have been found with Optuna, we can finally run the last training/inference to obtain classification results.
-If you used the optuna output directories already provided by us, you can find them inside [optuna_output_dirs](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/optuna_output_dirs). If instead you ran hypertuning yourself, you should have some Optuna output directories saved in the `optuna_output_dir` directory that you specified in the config files of the Optuna experiments. These output directories should be named:
+If you used the optuna output directories already provided by us, you can find them inside [optuna_output_dirs](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/optuna_output_dirs). If instead you ran hypertuning yourself, you should have some Optuna output directories saved in the `optuna_output_dir` path that you specified in the config files of the Optuna experiments. These output directories should be named:
 * `optuna_baseline_customVGG_MM_DD_YYYY`
 * `optuna_baseline_seresnext50_MM_DD_YYYY`
 * `optuna_transfer_learning_customVGG_MM_DD_YYYY`
