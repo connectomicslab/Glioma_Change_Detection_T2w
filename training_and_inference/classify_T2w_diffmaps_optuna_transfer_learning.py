@@ -393,6 +393,7 @@ def main():
     # extract training args
     fold_to_do = config_dict['fold_to_do']
     network = config_dict['network']
+    assert network in ("customVGG", "seresnext50"), "Only 'customVGG' and 'seresnext50' are allowed: found '{}' instead".format(network)
     date_of_pretrain = config_dict['date_of_pretrain']
     df_dates_and_labels_had = config_dict['df_dates_and_labels_had']  # path to dataframe containing comparative dates and reports
     data_path_had = config_dict['data_path_had']  # path to folder containing volume differences
