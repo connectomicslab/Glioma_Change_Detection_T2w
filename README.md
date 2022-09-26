@@ -19,7 +19,7 @@ feel free to use your favorite [IDE](https://en.wikipedia.org/wiki/Integrated_de
 [PyCharm](https://www.jetbrains.com/pycharm/download/#section=linux) or [Visual Studio](https://visualstudio.microsoft.com/downloads/) to set up the environment.
 
 ## How to run python script
-All scripts in this project are run with json configuration files and the [argparse](https://docs.python.org/3/library/argparse.html) package. If you're not familiar with this, please refer to [this guide](https://towardsdatascience.com/three-ways-to-parse-arguments-in-your-python-code-aba092e8ad73) (or similar ones)
+All scripts in this project are run with json configuration files and the [argparse](https://docs.python.org/3/library/argparse.html) package. If you're not familiar with this, please refer to [this guide](https://towardsdatascience.com/three-ways-to-parse-arguments-in-your-python-code-aba092e8ad73) (or similar ones).
 
 ## GPU needed!
 Most scripts in this project require you to have a GPU, with at least 4 GB of VRAM.
