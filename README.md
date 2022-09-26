@@ -111,4 +111,5 @@ classify_T2w_diffmaps_after_optuna_transfer_learning.py --config config_files_tr
 #### and so on for folds 2, 3, 4, and 5 (each time, change the config file accordingly)
 As usual, you must run the 5 folds both for the VGG model (setting the argument `network` to `"customVGG"`) and for the SEResNeXt model (setting the argument `network` to `"seresnext50"`)
 
-## 3) Inference on longitudinal BraTS-2015
+# 3) Inference on longitudinal BraTS-2015
+To assess model generalizability, we also ran inference on some longitudinal subjects from BraTS-2015. To replicate this experiment, you can use the script `inference_longitudinal_brats_tcia_subs.py` located inside the [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The config file to use is `config_inference_brats_tcia.json` that is located inside the [brats_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/brats_inference) directory
