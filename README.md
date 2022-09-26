@@ -52,7 +52,7 @@ and once for the SEResNeXt model, changing the argument `network` to `"seresnext
 The TL experiments are the ones for which we use both the Human-Annotated Dataset (**HAD** in the paper) and the Weakly-Annotated Dataset (**WAD** in the paper).
 If we want to carry out the TL experiments, we must first run pre-training on **WAD**, because in some TL configurations (fine-tuning and feature extracting)
 we will load weights from the model trained on it. In turn, to perform pre-training, we must have first run the Baseline experiments because we want to exclude
-from pre-training all validation and test patients that were used for the Baseline. Specifically, in the config file of the pre-training script, we will need
+from pre-training all validation and test patients that were used for the Baseline. The configuration files to run pre-training are located inside the [pretrain_wad](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/pretrain_wad) directory. In the config file of the pre-training script, we will need
 to specify `path_to_output_baseline_dir` which is exactly the output directory where we saved results of the Baseline experiment. Once the Baseline experiments
 have been run, we can launch pre-training. If you want to skip pre-training, we also provide the weights of the four pre-trained models which are inside the
 directory `extra_files`. In this case, you can skip directly to section **Transfer-Learning (cross-validation fold 1)**. If instead you want to re-run pretraining,
