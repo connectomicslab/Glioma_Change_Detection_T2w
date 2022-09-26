@@ -25,7 +25,7 @@ Most scripts in this project require you to have a GPU, with at least 4 GB of VR
 
 ## 1) Optuna hypertuning
 In order to find the best hyperparameters to use in the final classification, we first run hypertuning via [Optuna](https://optuna.org/). As explained in the paper, we ran 4 experiments: VGG-Baseline, VGG-Transfer-Learning, SEResNeXt-Baseline, and SEResNeXt-Transfer-Learning. The scripts used to find the best hyperparameters with Optuna are `classify_T2w_diffmaps_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and `classify_T2w_diffmaps_optuna_transfer_learning.py` (for VGG-Transfer-Learning and SEResNeXt-Transfer-Learning). Both scripts are located inside the
-[training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The configuration files needed to run the hyperparameter search with Optuna can be found inside the [optuna_hypertuning](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/optuna_hypertuning) directory. Let's start by looking how to run the Baseline experiments.
+[training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The configuration files needed to run the hyperparameter search with Optuna (both for the Baseline and the Transfer Learning experiments) can be found inside the [optuna_hypertuning](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/optuna_hypertuning) directory. Let's start by looking how to run the Baseline experiments.
 
 ### 1.1) Baseline
 The Baseline experiments are the ones for which we only use the Human-Annotated Dataset (**HAD** in the paper). Since every cross-validation fold is computationally intensive, we run each fold independently. Thus, for each of the five cross-validation folds, we must run:
@@ -64,7 +64,7 @@ classify_T2w_diffmaps_pretrain.py --config config_files_train_and_inf/pretrain_w
 #### and so on for folds 2, 3, 4, and 5 (each time, change the config file accordingly)
 
 Once pre-training has been run (both for WAD > 0.75, and WAD > 0.95), we can proceed with the actual Optuna hyperparameter search for the TL experiments.
-After running the two pre-training scripts (WAD > 0.75, and WAD > 0.95), four directories will be generated: they will be named
+After running the two pre-training scripts (WAD > 0.75, and WAD > 0.95), 4 directories will be generated: they will be named
  * `pretrain_aad_above_0_75_customVGG_le_1e-05_MM_DD_YYYY`
  * `pretrain_aad_above_0_75_seresnext50_le_1e-05_MM_DD_YYYY`
  * `pretrain_aad_above_0_95_customVGG_le_1e-05_MM_DD_YYYY`
