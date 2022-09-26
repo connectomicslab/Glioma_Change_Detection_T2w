@@ -8,7 +8,7 @@
 This repository contains the code used for the [paper](add_link): 
 "Transfer learning with weak labels from radiology reports: application to glioma change detection". 
 
-Please cite the paper if you are using either our dataset or model.
+Please cite the paper if you are using either our longitudinal BRATS-2015 dataset or code.
 
 ## Data
 You can find the data used for this project at www.smth.com
