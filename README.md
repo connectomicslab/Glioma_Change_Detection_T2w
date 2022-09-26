@@ -102,7 +102,7 @@ classify_T2w_diffmaps_after_optuna_baseline.py --config config_files_train_and_i
 #### and so on for folds 2, 3, 4, and 5 (each time, change the config file accordingly)
 As usual, you must run the 5 folds both for the VGG model (setting the argument `network` to `"customVGG"`) and for the SEResNeXt model (setting the argument `network` to `"seresnext50"`)
 
-### 2.1) Transfer-Learning (TL)
+### 2.2) Transfer-Learning (TL)
 For the TL experiment, we'd run (again for each cross-validation fold):
 ```python
 classify_T2w_diffmaps_after_optuna_transfer_learning.py --config config_files_train_and_inf/after_optuna/config_t2_difference_tl_after_optuna_f1.json
