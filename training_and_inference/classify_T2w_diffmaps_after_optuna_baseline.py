@@ -66,14 +66,11 @@ def classification_t2_volumes_difference_after_optuna_baseline(df_dates_and_labe
         optuna_output_dir: directory where we save (and load/resume) the optuna study
         study_name: optuna study name
         patience: number of epochs to wait for early-stopping if there is no improvement across epochs
-    Returns:
-        None
     """
     date = datetime.today().strftime('%b_%d_%Y')  # type: str # save today's date
-    date_hours_minutes = datetime.today().strftime('%b_%d_%Y_%Hh')  # type: str # save today's date
     out_dir = os.path.join(out_dir, "{}_{}_{}".format(legend_label,
                                                       network,
-                                                      date_hours_minutes))  # type: str # update name of output directory
+                                                      date))  # type: str # update name of output directory
 
     create_dir_if_not_exist(out_dir)  # if output dir does not exist, create it
 
