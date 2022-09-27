@@ -185,10 +185,25 @@ def main():
     else:  # if instead we run the script locally
         nb_workers = 1  # type: int # number of jobs to run in parallel
 
-    classification_t2_volumes_difference(df_comparative_dates_path, input_dir, batch_size, nb_workers, nb_epochs,
-                                         learning_rate, out_dir, val_interval, network, binary_classification, annotation_type,
-                                         legend_label, class_weights, nb_annotators, percentage_val_subs, fold_to_do,
-                                         path_to_output_baseline_dir, ext_cv_folds, patience)
+    classification_t2_volumes_difference(df_comparative_dates_path,
+                                         input_dir,
+                                         batch_size,
+                                         nb_workers,
+                                         nb_epochs,
+                                         learning_rate,
+                                         out_dir,
+                                         val_interval,
+                                         network,
+                                         binary_classification,
+                                         annotation_type,
+                                         legend_label,
+                                         class_weights,
+                                         nb_annotators,
+                                         percentage_val_subs,
+                                         fold_to_do,
+                                         path_to_output_baseline_dir,
+                                         ext_cv_folds,
+                                         patience)
 
 
 if __name__ == '__main__':
