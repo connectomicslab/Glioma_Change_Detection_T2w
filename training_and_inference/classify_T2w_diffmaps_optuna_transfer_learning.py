@@ -437,12 +437,31 @@ def main():
     else:  # if instead we run the script locally
         nb_workers = 1  # type: int # number of jobs to run in parallel
 
-    classification_t2_volumes_difference_optuna(df_dates_and_labels_had, data_path_had, batch_size, nb_workers, ext_cv_folds, nb_epochs,
-                                                out_dir, val_interval, network, binary_classification, pretrain_path_wad_above_0_75,
-                                                pretrain_path_wad_above_0_95, annotation_type, legend_label, class_weights, nb_annotators,
-                                                percentage_val_subs, data_path_wad, df_dates_and_labels_wad_above_0_75,
-                                                df_dates_and_labels_wad_above_0_95, split_added_data_across_folds, fold_to_do,
-                                                nb_optuna_trials, optuna_output_dir, patience)
+    classification_t2_volumes_difference_optuna(df_dates_and_labels_had,
+                                                data_path_had,
+                                                batch_size,
+                                                nb_workers,
+                                                ext_cv_folds,
+                                                nb_epochs,
+                                                out_dir,
+                                                val_interval,
+                                                network,
+                                                binary_classification,
+                                                pretrain_path_wad_above_0_75,
+                                                pretrain_path_wad_above_0_95,
+                                                annotation_type,
+                                                legend_label,
+                                                class_weights,
+                                                nb_annotators,
+                                                percentage_val_subs,
+                                                data_path_wad,
+                                                df_dates_and_labels_wad_above_0_75,
+                                                df_dates_and_labels_wad_above_0_95,
+                                                split_added_data_across_folds,
+                                                fold_to_do,
+                                                nb_optuna_trials,
+                                                optuna_output_dir,
+                                                patience)
 
 
 if __name__ == '__main__':
