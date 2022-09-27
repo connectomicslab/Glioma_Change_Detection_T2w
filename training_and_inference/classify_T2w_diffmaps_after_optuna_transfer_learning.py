@@ -26,14 +26,14 @@ __email__ = "tommydino@hotmail.it"
 __status__ = "Prototype"
 
 
-def classification_t2_volumes_difference_after_optuna_transfer_learning(df_comparative_dates_path: str,
-                                                                        input_dir: str,
+def classification_t2_volumes_difference_after_optuna_transfer_learning(df_dates_and_labels_had: str,
+                                                                        had_data_path: str,
                                                                         batch_size: int,
                                                                         nb_workers: int,
                                                                         ext_cv_folds: int,
                                                                         nb_epochs: int,
                                                                         out_dir: str,
-                                                                        automatically_annotated_data_path: str,
+                                                                        wad_data_path: str,
                                                                         split_added_data_across_folds: bool,
                                                                         val_interval: int,
                                                                         network: str,
@@ -51,15 +51,15 @@ def classification_t2_volumes_difference_after_optuna_transfer_learning(df_compa
                                                                         pretrain_path_above_0_95: str) -> None:
     """This function extracts the image pairs where annotators agree for the T2 conclusion and invokes the actual classification function
     Args:
-        df_comparative_dates_path: path to dataframe which contain the link between current and comparative exams
-        input_dir: path where the HAD volume differences are saved
+        df_dates_and_labels_had: path to dataframe which contain the link between current and comparative exams
+        had_data_path: path where the HAD volume differences are saved
         batch_size: batch size
         nb_workers: number of workers to use in parallel operations
         ext_cv_folds: number of external cross-validation folds
         nb_epochs: number of training epochs
         out_dir: output folder
-        automatically_annotated_data_path: path where the AAD volume differences are saved
-        split_added_data_across_folds: whether to split AAD data across folds or not
+        wad_data_path: path where the WAD volume differences are saved
+        split_added_data_across_folds: whether to split WAD data across folds or not
         val_interval: epoch frequency with which we print/save validation metrics
         network: model to use for training and inference
         binary_classification: whether to perform binary classification or not
@@ -89,12 +89,12 @@ def classification_t2_volumes_difference_after_optuna_transfer_learning(df_compa
         copyfile(config_file_path, config_out_path)
 
     # set names of columns of interest that we want to extract
-    df_rows_with_known_t2_label = extract_reports_with_known_t2_label_agreed_between_annotators(df_comparative_dates_path,
+    df_rows_with_known_t2_label = extract_reports_with_known_t2_label_agreed_between_annotators(df_dates_and_labels_had,
                                                                                                 binary_classification,
                                                                                                 nb_annotators,
                                                                                                 annotation_type)  # type: pd.DataFrame
 
-    all_subs, volume_differences_t2, classification_labels, median_shape_orig = extract_volumes_and_labels(input_dir,
+    all_subs, volume_differences_t2, classification_labels, median_shape_orig = extract_volumes_and_labels(had_data_path,
                                                                                                            df_rows_with_known_t2_label,
                                                                                                            annotation_type)
     print("\nMedian shape: {}".format(median_shape_orig))
@@ -146,7 +146,7 @@ def classification_t2_volumes_difference_after_optuna_transfer_learning(df_compa
             best_wd = best_trial.params["wd"]
             best_feature_extracting = best_trial.params["feature_extracting"]
             best_pretrain_path = best_trial.params["pretrain_path"]
-            best_df_aad_path = best_trial.params["df_aad_path"]
+            best_df_wad_path = best_trial.params["df_wad_path"]
 
             # if we want to load the weights of a pre-trained model (i.e.if pretrain_path is not empty)
             if best_pretrain_path:
@@ -160,7 +160,7 @@ def classification_t2_volumes_difference_after_optuna_transfer_learning(df_compa
                 # re-instantiate the model for every trial such that we always re-start with random weights
                 model, model_for_inference = select_model(network, device, nb_output_classes, conv_filters_vgg, fc_nodes_vgg)
 
-            # choose median_shape (it can slightly vary depending on which AAD we use)
+            # choose median_shape (it can slightly vary depending on which WAD we use)
             if not best_pretrain_path:  # if pretrain_path is empty
                 median_shape = median_shape_orig
             elif best_pretrain_path == pretrain_path_above_0_75:
@@ -215,15 +215,15 @@ def classification_t2_volumes_difference_after_optuna_transfer_learning(df_compa
             # save list of validation subjects to disk; we will use it later to avoid training on these during pre-training
             save_list_to_disk_with_pickle(val_subs, os.path.join(out_dir, "fold{}".format(external_cv_fold_counter)), "val_subs_split{}.pkl".format(external_cv_fold_counter))
 
-            # if we want to add the automatically-annotated data (i.e. if automatically_annotated_data_path is not empty) AND pretrain_path is empty
-            # either we mix HAD and AAD and train from scratch OR we do pretrain + fine-tuning/feature-extracting
-            if automatically_annotated_data_path and not best_pretrain_path:
+            # if we want to add the automatically-annotated data (i.e. if wad_data_path is not empty) AND pretrain_path is empty
+            # either we mix HAD and WAD and train from scratch OR we do pretrain + fine-tuning/feature-extracting
+            if wad_data_path and not best_pretrain_path:
 
-                print("\nLength x_int_train before adding AAD: {}".format(len(x_int_train)))
-                x_int_train, y_int_train = add_automatically_annotated_data(automatically_annotated_data_path,
+                print("\nLength x_int_train before adding WAD: {}".format(len(x_int_train)))
+                x_int_train, y_int_train = add_automatically_annotated_data(wad_data_path,
                                                                             x_int_train,
                                                                             y_int_train,
-                                                                            best_df_aad_path,
+                                                                            best_df_wad_path,
                                                                             ext_cv_folds,
                                                                             external_cv_fold_counter,
                                                                             split_added_data_across_folds,
@@ -231,7 +231,7 @@ def classification_t2_volumes_difference_after_optuna_transfer_learning(df_compa
                                                                             test_subs,
                                                                             shuffle=True)
 
-                print("\nLength x_int_train after adding AAD: {}\n".format(len(x_int_train)))
+                print("\nLength x_int_train after adding WAD: {}\n".format(len(x_int_train)))
 
             # create list of dictionaries
             int_train_files = [{"volume": volume_name, 'label': label_name} for volume_name, label_name in zip(x_int_train, y_int_train)]
@@ -275,6 +275,12 @@ def main():
     fold_to_do = config_dict['fold_to_do']
     network = config_dict['network']
     assert network in ("customVGG", "seresnext50"), "Only 'customVGG' and 'seresnext50' are allowed: found '{}' instead".format(network)
+    df_dates_and_labels_had = config_dict['df_dates_and_labels_had']  # path to dataframe containing comparative dates and reports
+    had_data_path = config_dict['had_data_path']  # path to folder containing HAD volume differences
+    out_dir = config_dict['out_dir']  # path where we save model parameters
+    wad_data_path = config_dict['wad_data_path']  # path to folder containing WAD volume differences
+    optuna_output_dir = config_dict['optuna_output_dir']  # directory where we save (and load/resume) the optuna study
+
     batch_size = config_dict['batch_size']  # batch size used during training
     ext_cv_folds = config_dict['ext_cv_folds']  # number of external cross validation folds
     nb_epochs = config_dict['nb_epochs']  # number of training epochs
@@ -285,17 +291,13 @@ def main():
     class_weights = config_dict['class_weights']  # type: list # to use during training to weight more one class wrt another
     nb_annotators = config_dict['nb_annotators']  # type: int # number of human annotators
     percentage_val_subs = config_dict['percentage_val_subs']  # type: float
-
-    df_comparative_dates_path = config_dict['df_comparative_dates_path']  # path to dataframe containing comparative dates and reports
-    input_dir = config_dict['input_dir']  # path to folder containing HAD volume differences
-    out_dir = config_dict['out_dir']  # path where we save model parameters
-    automatically_annotated_data_path = config_dict['automatically_annotated_data_path']  # path to folder containing AAD volume differences
     split_added_data_across_folds = str2bool(config_dict['split_added_data_across_folds'])
-    optuna_output_dir = config_dict['optuna_output_dir']  # directory where we save (and load/resume) the optuna study
     study_name = config_dict['study_name'].replace("foldX", "fold{}".format(fold_to_do))
     patience = config_dict['patience']
     pretrain_path_above_0_75 = config_dict['pretrain_path_above_0_75'].replace("foldX", "fold{}".format(fold_to_do))
+    pretrain_path_above_0_75 = pretrain_path_above_0_75.replace("modelX", "{}".format(network))
     pretrain_path_above_0_95 = config_dict['pretrain_path_above_0_95'].replace("foldX", "fold{}".format(fold_to_do))
+    pretrain_path_above_0_95 = pretrain_path_above_0_95.replace("modelX", "{}".format(network))
 
     # set number of jobs to run in parallel
     on_hpc_cluster = getpass.getuser() in ['to5743']  # type: bool # check if user is in list of authorized users
@@ -305,14 +307,14 @@ def main():
     else:  # if instead we run the script locally
         nb_workers = 1  # type: int # number of jobs to run in parallel
 
-    classification_t2_volumes_difference_after_optuna_transfer_learning(df_comparative_dates_path,
-                                                                        input_dir,
+    classification_t2_volumes_difference_after_optuna_transfer_learning(df_dates_and_labels_had,
+                                                                        had_data_path,
                                                                         batch_size,
                                                                         nb_workers,
                                                                         ext_cv_folds,
                                                                         nb_epochs,
                                                                         out_dir,
-                                                                        automatically_annotated_data_path,
+                                                                        wad_data_path,
                                                                         split_added_data_across_folds,
                                                                         val_interval,
                                                                         network,
