@@ -24,51 +24,6 @@ __email__ = "tommydino@hotmail.it"
 __status__ = "Prototype"
 
 
-def interpolate_val_values(val_metric: list,
-                           val_interval: int,
-                           x_axis_train: np.ndarray) -> list:
-    """This function interpolates the input validation metric because this might not have the same length of the training metrics.
-    This happens because we only compute validation metrics every val_interval epochs.
-    Args:
-        val_metric: validation metric that we want to interpolate
-        val_interval: epoch frequency with which we compute validation metrics
-        x_axis_train: x axis corresponding to training metric
-    Returns:
-        y_new_list: interpolated validation metrics with same length of training metrics
-    """
-    n = len(val_metric)  # compute length of validation metric
-    x = np.arange(0, val_interval * n, val_interval)  # compute x_axis of validation metric
-    y_new = np.interp(x_axis_train, x, val_metric)  # interpolate using the x axis of the training metric(s)
-    y_new_list = list(y_new)  # convert to list
-    return y_new_list
-
-
-def save_train_loss_curves(train_loss: list,
-                           out_dir: str,
-                           out_filename: str) -> None:
-    """ This function plots the training loss curve
-    Args:
-        train_loss: training loss
-        out_dir: dir where we want to save the image
-        out_filename: name of output file
-    """
-    create_dir_if_not_exist(out_dir)  # if output directory does not exist, create it
-
-    out_image_path = os.path.join(out_dir, out_filename)  # create full path for saving the image
-
-    x_axis = np.arange(1, len(train_loss) + 1, 1)  # since the input vectors have same length, just use one of them to extract epochs
-    fig, ax1 = plt.subplots()  # create figure
-    color_1 = 'tab:red'
-    ax1.plot(x_axis, train_loss, color=color_1, label='Train loss')
-    ax1.tick_params(axis='y', labelcolor=color_1)
-    ax1.set_xlabel('Epochs')
-    ax1.set_ylabel("Loss")
-    ax1.xaxis.set_major_locator(MaxNLocator(integer=True))  # only keep integers in x axis
-
-    fig.suptitle('Train loss Curves', fontsize=16, fontweight='bold'), fig.legend(loc="upper right")
-    fig.savefig(out_image_path)  # save the full figure
-
-
 def save_loss_curves(train_loss: list,
                      val_loss: list,
                      image_dir: str,
@@ -383,42 +338,6 @@ def extract_train_and_test_volumes_and_labels(all_subs: list,
     test_labels = [labels[idx] for idx in idxs_test_volumes]
 
     return train_subs, test_subs, train_volume_differences, train_labels, test_volume_differences, test_labels
-
-
-def extract_volumes_and_labels_from_data_loader(batch_data: list,
-                                                device: torch.device) -> Tuple[torch.Tensor, torch.Tensor]:
-    """This function extracts the volumes and the labels from a batch
-    Args:
-        batch_data: one batch of dataset
-        device: device where we are running the operations
-    Returns:
-        inputs: the volumes of the batch
-        labels: the labels of the batch
-    """
-    input_tensors = [x["volume"] for x in batch_data]  # type: list # extract volume tensors
-    input_labels = [x["label"] for x in batch_data]  # type: list # extract labels
-    inputs = torch.stack(input_tensors, dim=0).to(device)  # type: torch.Tensor # stack volumes into one unique tensor
-    labels = torch.tensor(input_labels).to(device)  # type: torch.Tensor # convert labels to tensor
-
-    return inputs, labels
-
-
-def print_running_time(start_time: float,
-                       end_time: float,
-                       process_name: str) -> None:
-    """This function takes as input the start and the end time of a process and prints to console the time elapsed for this process
-    Args:
-        start_time: instant when the timer is started
-        end_time: instant when the timer was stopped
-        process_name: name of the process
-    """
-    sentence = str(process_name)  # convert to string whatever the user inputs as third argument
-    temp = end_time - start_time  # compute time difference
-    hours = temp // 3600  # compute hours
-    temp = temp - 3600 * hours  # if hours is not zero, remove equivalent amount of seconds
-    minutes = temp // 60  # compute minutes
-    seconds = temp - 60 * minutes  # compute minutes
-    print('\n%s time: %d hh %d mm %d ss' % (sentence, hours, minutes, seconds))
 
 
 def training_loop_with_validation(nb_epochs: int,
