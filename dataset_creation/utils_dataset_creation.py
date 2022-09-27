@@ -9,7 +9,10 @@ __status__ = "Prototype"
 
 
 def get_parser() -> argparse.ArgumentParser:
-    """This function creates a parser for handling input arguments"""
+    """This function creates a parser for handling input arguments
+    Returns:
+        p: parser
+    """
     p = argparse.ArgumentParser()  # type: argparse.ArgumentParser
     # add argument to config file
     p.add_argument('--config', type=str, required=True, help='Path to json configuration file.')
