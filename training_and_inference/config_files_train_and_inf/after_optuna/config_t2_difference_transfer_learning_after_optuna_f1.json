@@ -1,0 +1,25 @@
+{
+	"fold_to_do": 1,
+	"network": "customVGG",
+	"df_dates_and_labels_had": "/path/to/extra_files/df_dates_and_t2_labels_had.csv",
+	"had_data_path": "/path/to/T2_difference_maps/out_Mar_22_2022_manual_labels",
+	"out_dir": "/path/to/classification_out_dir/",
+	"wad_data_path": "/path/to/T2_difference_maps/out_Mar_24_2022_automatic_labels_also_manual_subs",
+	"optuna_output_dir": "/path/to/specific_optuna_output_dir/",
+
+ 	"batch_size": 4,
+	"ext_cv_folds": 5,
+	"nb_epochs": 60,
+	"val_interval": 1,
+	"binary_classification": "True",
+	"annotation_type": "manual",	
+	"legend_label": "transfer_learning_after_optuna",
+	"class_weights": [0.4, 0.6],	
+	"nb_annotators": 3,
+	"percentage_val_subs": 0.25,
+	"split_added_data_across_folds": "False",
+	"study_name": "optuna_best_params_foldX_optuna_transfer_learning",
+	"patience": 10,
+	"pretrain_path_above_0_75": "/path/to/extra/pretraining/pretrain_aad_above_0_75_modelX_lr_1e-05_May_23_2022/foldX/best_model.pth",
+	"pretrain_path_above_0_95": "/path/to/extra/pretraining/pretrain_aad_above_0_95_modelX_lr_1e-05_May_23_2022/foldX/best_model.pth"
+}

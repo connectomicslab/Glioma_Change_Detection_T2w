@@ -9,7 +9,7 @@
 
  	"batch_size": 4,
 	"ext_cv_folds": 5,
-	"nb_epochs": 10,
+	"nb_epochs": 60,
 	"val_interval": 1,
 	"binary_classification": "True",
 	"annotation_type": "manual",	
