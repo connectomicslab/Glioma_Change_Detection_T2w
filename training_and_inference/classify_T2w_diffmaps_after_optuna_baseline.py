@@ -251,10 +251,25 @@ def main():
     else:  # if instead we run the script locally
         nb_workers = 1  # type: int # number of jobs to run in parallel
 
-    classification_t2_volumes_difference_after_optuna_baseline(df_dates_and_labels_had, input_dir, batch_size, nb_workers, ext_cv_folds,
-                                                               nb_epochs, out_dir, val_interval, network, binary_classification, annotation_type,
-                                                               legend_label, class_weights, nb_annotators, percentage_val_subs, fold_to_do,
-                                                               optuna_output_dir, study_name, patience)
+    classification_t2_volumes_difference_after_optuna_baseline(df_dates_and_labels_had,
+                                                               input_dir,
+                                                               batch_size,
+                                                               nb_workers,
+                                                               ext_cv_folds,
+                                                               nb_epochs,
+                                                               out_dir,
+                                                               val_interval,
+                                                               network,
+                                                               binary_classification,
+                                                               annotation_type,
+                                                               legend_label,
+                                                               class_weights,
+                                                               nb_annotators,
+                                                               percentage_val_subs,
+                                                               fold_to_do,
+                                                               optuna_output_dir,
+                                                               study_name,
+                                                               patience)
 
 
 if __name__ == '__main__':
