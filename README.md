@@ -93,7 +93,7 @@ If you used the optuna output directories already provided by us, you can find t
 * `optuna_transfer_learning_seresnext50_MM_DD_YYYY`
 
 To run the final inference, we can use the scripts `classify_T2w_diffmaps_after_optuna_baseline.py` (for VGG-Baseline and SEResNeXt-Baseline) and 
-`classify_T2w_diffmaps_after_optuna_transfer_learning.py` (for VGG-TL and SEResNeXt-TL). These scripts are located inside the [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The configuration files for the final training/inference are located inside the [after_optuna](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/after_optuna) directory
+`classify_T2w_diffmaps_after_optuna_transfer_learning.py` (for VGG-TL and SEResNeXt-TL). These scripts are located inside the [training_and_inference](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference) directory. The configuration files for the final training/inference are located inside the [after_optuna](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/training_and_inference/config_files_train_and_inf/after_optuna) directory. Inside the configuration files, you must set the argument `optuna_output_dir` either corresponding to the one of the paths provided by us (those in [optuna_output_dirs](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files/optuna_output_dirs)) or corresponding to one of the folders that were generated when you ran the scripts above.
 ### 2.1) Baseline
 For the Baseline experiment, we'd run (again for each cross-validation fold):
 ```python
