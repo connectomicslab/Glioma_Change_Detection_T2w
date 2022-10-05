@@ -88,15 +88,6 @@ def inference_on_brats_tcia_subs(batch_size: int,
             model_for_inference.load_state_dict(torch.load(best_model_path, map_location=device))  # load best params according to validation results
             filenames, y_pred_binary_test, y_pred_probab_test, y_true_test = run_inference(model_for_inference, test_loader, device)
 
-            # conf_mat, acc, rec_macro, spec, prec_macro, npv, f1_macro, _, _, _ = classification_metrics(np.asarray(y_true_test),
-            #                                                                                             np.asarray(y_pred_binary_test))
-            # print("Accuracy = {:.2f}".format(acc))
-            # print("Sensitivity (recall) = {:.2f}".format(rec_macro))
-            # print("Specificity = {:.2f}".format(spec))
-            # print("Precision (PPV) = {:.2f}".format(prec_macro))
-            # print("NPV = {:.2f}".format(npv))
-            # print("f1-score = {:.2f}".format(f1_macro))
-
             # append to external lists
             y_filenames_all_folds.append(filenames)
             y_pred_binary_test_all_folds.append(y_pred_binary_test)
@@ -163,7 +154,6 @@ def main():
     legend_label = legend_label.replace("EXPERIMENT", "{}".format(experiment))
     legend_label = legend_label.replace("NETWORK", "{}".format(network))
     median_shape_training_set = tuple(config_dict['median_shape_training_set'])  # median volume shape used during training
-
     path_df_sub_ses_label = config_dict['path_df_sub_ses_label']  # path to dataframe containing the labels
     input_dir = config_dict['input_dir']  # path to folder containing volume differences
     out_dir = config_dict['out_dir']  # path where we save model parameters
