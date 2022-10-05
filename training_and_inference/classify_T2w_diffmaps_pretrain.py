@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append('/home/to5743/glioma_project/Change_Detection_Glioma/')  # this line is needed on the HPC cluster to recognize the dir as a python package
+sys.path.append('/home/to5743/glioma_project/Glioma_Change_Detection_T2w/')  # this line is needed on the HPC cluster to recognize the dir as a python package
 import pandas as pd
 import torch
 from torch.utils.data import DataLoader
