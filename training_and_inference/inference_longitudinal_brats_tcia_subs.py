@@ -2,7 +2,6 @@ import os
 import sys
 sys.path.append('/home/to5743/glioma_project/Glioma_Change_Detection_T2w/')  # this line is needed on the HPC cluster to recognize the dir as a python package
 from dataset_creation.utils_dataset_creation import load_config_file
-from utils_tdinoto.utils_strings import str2bool
 from datetime import datetime
 from training_and_inference.utils_volume_classification import create_dir_if_not_exist, extract_volumes_and_labels_brats_tcia, \
     extract_unique_elements, select_model, run_inference, all_elements_in_list_are_identical
