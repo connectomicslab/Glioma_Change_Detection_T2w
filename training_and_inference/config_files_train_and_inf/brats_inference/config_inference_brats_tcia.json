@@ -1,13 +1,13 @@
 {
- 	"batch_size": 4,
 	"network": "seresnext50",
 	"experiment": "baseline",
+
+ 	"batch_size": 4,
 	"annotation_type": "manual",
 	"legend_label": "inference_brats_load_EXPERIMENT_NETWORK",
 	"median_shape_training_set": [310, 388, 48],
-
-	"path_df_sub_ses_label": "/home/newuser/Desktop/Medical_Reports/df_comparative_dates_and_reports/df_comp_dates_reports_brats_tcia_patric_Sep_01_2022.csv",
-    "input_dir": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/BRATS_2015_difference_maps/Dataset_Diffmaps_BRATS_2015_TCIA_Aug_29_2022/",
-    "out_dir": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/",
-    "path_dir_previous_training": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/EXPERIMENT_after_optuna_NETWORK/"
+	"path_df_sub_ses_label": "/path/to/extra_files/df_dates_and_t2_labels_brats_tcia_2015.csv",
+    "input_dir": "/path/to/Dataset_Diffmaps_BRATS_2015_TCIA/",
+    "out_dir": "/path/to/classification_out_dir/",
+    "path_dir_previous_training": "/path/to/extra_files/after_optuna/EXPERIMENT_after_optuna_NETWORK/"
 }
