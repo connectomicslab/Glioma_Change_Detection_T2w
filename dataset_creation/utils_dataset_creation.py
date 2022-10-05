@@ -219,7 +219,7 @@ def register_comparative_2_current(current_volume_path: str,
 def dcm2niix_wrapper(out_dir: str,
                      volume_path: str,
                      out_name: str) -> None:
-    """This function is a wrapper for the commandline command dcm2niix.
+    """This function is a wrapper for the commandline function dcm2niix.
     It is used to convert a dicom file into the corresponding nifti+json
     Args:
         out_dir: folder where the nifti (and json) will be saved
