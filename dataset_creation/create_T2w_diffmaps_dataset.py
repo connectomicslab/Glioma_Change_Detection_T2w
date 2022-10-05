@@ -3,7 +3,6 @@ import sys
 sys.path.append('/home/to5743/glioma_project/Change_Detection_Glioma/')  # make root project dir a python package
 import pandas as pd
 from datetime import datetime
-import nibabel as nib
 import numpy as np
 from joblib import Parallel, delayed
 import getpass
@@ -144,7 +143,8 @@ def create_difference_volume_one_sub(idx: int,
 
                                         # ---- registered comparative
                                         registered_bet_comparative_t2_volume_n4_normalized = zscore(registered_bet_comparative_t2_volume_n4, axis=None)  # z-score normalization
-                                        registered_bet_comparative_t2_volume_n4_normalized[registered_bet_comparative_t2_volume_n4 == 0] = 0  # set background back to zero as it was after brain extraction (otherwise the normalization changes its value)
+                                        # set background back to zero as it was after brain extraction (otherwise the normalization changes its value)
+                                        registered_bet_comparative_t2_volume_n4_normalized[registered_bet_comparative_t2_volume_n4 == 0] = 0
                                         out_filename_comparative_cropped_zscored = out_filename_comparative_cropped.replace("cropped", "cropped_zscored")
                                         save_volume_to_disk(registered_bet_comparative_t2_volume_n4_normalized, registered_aff, out_folder_unique, out_filename_comparative_cropped_zscored)
 
