@@ -15,6 +15,12 @@ from utils_tdinoto.utils_strings import add_leading_zeros, str2bool
 from utils_tdinoto.utils_lists import load_list_from_disk_with_pickle
 
 
+__author__ = "Tommaso Di Noto"
+__version__ = "0.0.1"
+__email__ = "tommydino@hotmail.it"
+__status__ = "Prototype"
+
+
 def create_difference_volume_one_sub(idx: int,
                                      row: pd.Series,
                                      data_path: str,
@@ -40,7 +46,7 @@ def create_difference_volume_one_sub(idx: int,
     sub_folder = os.path.join(data_path, sub)
     current_exam_partial_ses = "ses-{}".format(row['exam_date'])
     comparative_exam_partial_ses = "ses-{}".format(row['comparative_date'])
-    if comparative_exam_partial_ses < current_exam_partial_ses:
+    if comparative_exam_partial_ses < current_exam_partial_ses:  # the comparative data should be lower (before in time) than the current (most recent) date
         ses_diff = "{}_vs_{}".format(comparative_exam_partial_ses, current_exam_partial_ses)
         print("{}/{}: {} {}".format(idx + 1, df_link.shape[0], sub, ses_diff))
 
