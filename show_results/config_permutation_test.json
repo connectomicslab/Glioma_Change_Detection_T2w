@@ -1,8 +1,8 @@
 {
-    "nb_permutations": 10000,
-    "test_statistic": "aupr",
+	"nb_permutations": 10000,
+	"test_statistic": "aupr",
 
-    "output_dir_vgg_baseline": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/Journal_Paper_June_2022/baseline_after_optuna_customVGG_May_03_2022_10h/",
+	"output_dir_vgg_baseline": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/Journal_Paper_June_2022/baseline_after_optuna_customVGG_May_03_2022_10h/",
 	"legend_label_vgg_baseline": "vgg_baseline",
 
 	"output_dir_vgg_transfer_learning": "/media/newuser/HagmannHDD/Glioma_Project_Tommaso/classification_out_dir/Journal_Paper_June_2022/transfer_learning_after_optuna_customVGG_May_17_2022_14h/",
