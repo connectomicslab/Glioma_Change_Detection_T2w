@@ -124,31 +124,31 @@ def run_permutation_tests(nb_permutations: int,
                           legend_label_seresnext_transfer_learning_brats_inference: str,
                           test_statistic: str) -> None:
 
-    # # TRANSFER LEARNING vs. BASELINE experiments
-    # experiments_transfer_learning_vs_baseline(output_dir_vgg_baseline,
-    #                                           legend_label_vgg_baseline,
-    #                                           output_dir_vgg_transfer_learning,
-    #                                           legend_label_vgg_transfer_learning,
-    #                                           output_dir_seresnext_baseline,
-    #                                           legend_label_seresnext_baseline,
-    #                                           output_dir_seresnext_transfer_learning,
-    #                                           legend_label_seresnext_transfer_learning,
-    #                                           nb_permutations,
-    #                                           test_statistic)
-#
-    # # VGG vs. SERESNEXT experiments
-    # experiments_vgg_vs_seresnext(output_dir_vgg_baseline,
-    #                              legend_label_vgg_baseline,
-    #                              output_dir_vgg_transfer_learning,
-    #                              legend_label_vgg_transfer_learning,
-    #                              output_dir_seresnext_baseline,
-    #                              legend_label_seresnext_baseline,
-    #                              output_dir_seresnext_transfer_learning,
-    #                              legend_label_seresnext_transfer_learning,
-    #                              nb_permutations,
-    #                              test_statistic)
+    # TRANSFER LEARNING vs. BASELINE experiments
+    experiments_transfer_learning_vs_baseline(output_dir_vgg_baseline,
+                                              legend_label_vgg_baseline,
+                                              output_dir_vgg_transfer_learning,
+                                              legend_label_vgg_transfer_learning,
+                                              output_dir_seresnext_baseline,
+                                              legend_label_seresnext_baseline,
+                                              output_dir_seresnext_transfer_learning,
+                                              legend_label_seresnext_transfer_learning,
+                                              nb_permutations,
+                                              test_statistic)
 
-    # BRAT-TCIA INFERENCE
+    # VGG vs. SERESNEXT experiments
+    experiments_vgg_vs_seresnext(output_dir_vgg_baseline,
+                                 legend_label_vgg_baseline,
+                                 output_dir_vgg_transfer_learning,
+                                 legend_label_vgg_transfer_learning,
+                                 output_dir_seresnext_baseline,
+                                 legend_label_seresnext_baseline,
+                                 output_dir_seresnext_transfer_learning,
+                                 legend_label_seresnext_transfer_learning,
+                                 nb_permutations,
+                                 test_statistic)
+
+    # # BRAT-TCIA INFERENCE
     experiments_brats_inference(output_dir_vgg_baseline_brats_inference,
                                 legend_label_vgg_baseline_brats_inference,
                                 output_dir_vgg_transfer_learning_brats_inference,
