@@ -76,20 +76,23 @@ def plot_roc_curve_wo_std(tpr_vgg_baseline,
     ax.legend(loc="lower right")
 
 
-def extract_average_values_pr(nb_random_realizations, recall_list, precision_list, aupr_values):
+def extract_average_values_pr(nb_random_realizations: int,
+                              recall_list: list,
+                              precision_list: list,
+                              aupr_values: list) -> Tuple[float, float, float, float, float, float]:
     """This function extracts the average values for the PR curve across the random realizations
     Args:
-        nb_random_realizations (int): number of cross-validation runs that were performed
-        recall_list (list): it contains the recall values across the random realizations
-        precision_list (list): it contains the precision values across the random realizations
-        aupr_values (list): it contains the AUPR values across the random realizations
+        nb_random_realizations: number of cross-validation runs that were performed
+        recall_list: it contains the recall values across the random realizations
+        precision_list: it contains the precision values across the random realizations
+        aupr_values: it contains the AUPR values across the random realizations
     Returns:
-        mean_prec (float): mean precision value across random realizations
-        std_prec (float): standard deviation precision value across random realizations
-        precisions_upper (float): upper bound (+1 std)
-        precisions_lower (float): lower bound (+1 std)
-        avg_aupr (float): mean AUPR value across random realizations
-        std_aupr (float): standard deviation AUPR value across random realizations
+        mean_prec: mean precision value across random realizations
+        std_prec: standard deviation precision value across random realizations
+        precisions_upper: upper bound (+1 std)
+        precisions_lower: lower bound (+1 std)
+        avg_aupr: mean AUPR value across random realizations
+        std_aupr: standard deviation AUPR value across random realizations
     """
     precisions = []  # type: list
     mean_recall = np.linspace(0, 1, 100)
@@ -116,20 +119,23 @@ def extract_average_values_pr(nb_random_realizations, recall_list, precision_lis
     return mean_prec, std_prec, precisions_upper, precisions_lower, avg_aupr, std_aupr
 
 
-def extract_average_values_roc(nb_random_realizations, fpr_list, tpr_list, auc_values):
+def extract_average_values_roc(nb_random_realizations: int,
+                               fpr_list: list,
+                               tpr_list: list,
+                               auc_values: list) -> Tuple[float, float, float, float, float, float]:
     """This function extracts the average values for the ROC curve across the random realizations
         Args:
-            nb_random_realizations (int): number of cross-validation runs that were performed
-            fpr_list (list): it contains the FPR values across the random realizations
-            tpr_list (list): it contains the TPR values across the random realizations
-            auc_values (list): it contains the AUC values across the random realizations
+            nb_random_realizations: number of cross-validation runs that were performed
+            fpr_list: it contains the FPR values across the random realizations
+            tpr_list: it contains the TPR values across the random realizations
+            auc_values: it contains the AUC values across the random realizations
         Returns:
-            mean_tpr (float): mean TPR value across random realizations
-            std_tpr (float): standard deviation TPR value across random realizations
-            tprs_upper (float): upper bound (+1 std)
-            tprs_lower (float): lower bound (+1 std)
-            avg_auc (float): mean AUC value across random realizations
-            std_auc (float): standard deviation AUC value across random realizations
+            mean_tpr: mean TPR value across random realizations
+            std_tpr: standard deviation TPR value across random realizations
+            tprs_upper: upper bound (+1 std)
+            tprs_lower: lower bound (+1 std)
+            avg_auc: mean AUC value across random realizations
+            std_auc: standard deviation AUC value across random realizations
         """
     tprs = []  # type: list
     mean_fpr = np.linspace(0, 1, 100)
@@ -211,7 +217,8 @@ def plot_avg_roc_curve_with_std(fpr_vgg_baseline,
     ax.legend(loc="lower right")
 
 
-def extract_roc_curve_params_across_folds_flattened(output_dir, brats_inference=False):
+def extract_roc_curve_params_across_folds_flattened(output_dir,
+                                                    brats_inference=False):
 
     if not brats_inference:
         y_true_flat, y_pred_probab_flat = extract_flat_preds_and_ground_truth_from_cv_folds(output_dir)
@@ -231,10 +238,14 @@ def extract_roc_curve_params_across_folds_flattened(output_dir, brats_inference=
     return mean_fpr, interp_tpr, auc_roc
         
 
-def extract_roc_curve_params_across_folds(output_dir):
+def extract_roc_curve_params_across_folds(output_dir: str) -> Tuple[list, list, list]:
     """This function extracts the parameters of the ROC curve
     Args:
-        output_dir (str): path to output directory
+        output_dir: path to output directory
+    Returns:
+        fpr_across_folds: it contains the fpr values
+        tpr_across_folds: it contains the tpr values
+        auc_across_folds: it contains the auc values
     """
     files_in_output_dir = os.listdir(output_dir)
     folds = [file for file in files_in_output_dir if "fold" in file and os.path.isdir(os.path.join(output_dir, file))]
@@ -259,10 +270,14 @@ def extract_roc_curve_params_across_folds(output_dir):
     return fpr_across_folds, tpr_across_folds, auc_across_folds
 
 
-def extract_pr_curve_params_across_folds(output_dir):
+def extract_pr_curve_params_across_folds(output_dir: str) -> Tuple[list, list, list]:
     """This function extracts the parameters of the PR curve
     Args:
-        output_dir (str): path to output directory
+        output_dir: path to output directory
+    Returns:
+        recall_across_folds: it contains the recall values
+        precision_across_folds: it contains the precision values
+        aupr_across_folds: it contains the aupr values
     """
     files_in_output_dir = os.listdir(output_dir)
     folds = [file for file in files_in_output_dir if "fold" in file and os.path.isdir(os.path.join(output_dir, file))]
@@ -285,7 +300,7 @@ def extract_pr_curve_params_across_folds(output_dir):
     return recall_across_folds, precision_across_folds, aupr_across_folds
 
 
-def find_average_no_skill_across_folds_pr_curve(out_dir, brats_inference=False):
+def find_average_no_skill_across_folds_pr_curve(out_dir: str, brats_inference=False) -> float:
     """This function finds the no-skill value of the PR curve across the cross-validation folds.
     """
     if not brats_inference:
@@ -366,7 +381,7 @@ def plot_avg_pr_curve_with_std(recall_vgg_baseline,
     plt.show()
 
 
-def extract_flat_preds_and_ground_truth_from_cv_folds(output_dir):
+def extract_flat_preds_and_ground_truth_from_cv_folds(output_dir: str) -> Tuple[list, list]:
     files_in_output_dir = os.listdir(output_dir)
     folds = [file for file in files_in_output_dir if "fold" in file and os.path.isdir(os.path.join(output_dir, file))]
     assert len(folds) == 5, "We expect to have 5 folds"
@@ -386,7 +401,7 @@ def extract_flat_preds_and_ground_truth_from_cv_folds(output_dir):
     return y_true_flat, y_pred_probab_flat
 
 
-def extract_pr_curve_params_across_folds_flattened(output_dir, brats_inference=False):
+def extract_pr_curve_params_across_folds_flattened(output_dir: str, brats_inference=False):
 
     if not brats_inference:
         y_true_flat, y_pred_probab_flat = extract_flat_preds_and_ground_truth_from_cv_folds(output_dir)
@@ -612,7 +627,9 @@ def permutation_tests(output_dir_model1,
         print("NON-significant difference. p-value = {}".format(p_value))
 
 
-def classification_metrics(y_true: np.ndarray, y_pred: np.ndarray, binary: bool = True) -> Tuple[np.ndarray, float, float, float, float, float, float, float, float, float]:
+def classification_metrics(y_true: np.ndarray,
+                           y_pred: np.ndarray,
+                           binary: bool = True) -> Tuple[np.ndarray, float, float, float, float, float, float, float, float, float]:
     """This function computes some standard classification metrics for a binary problem
     Args:
         y_true: ground truth labels
@@ -655,14 +672,18 @@ def classification_metrics(y_true: np.ndarray, y_pred: np.ndarray, binary: bool 
     return conf_mat, acc, rec_macro, spec, prec_macro, npv, f1_macro, rec_weighted, prec_weighted, f1_weighted
 
 
-def plot_roc_curve(flat_y_test, flat_y_pred_proba, cv_folds, embedding_label="doc2vec", plot=True):
+def plot_roc_curve(flat_y_test: list,
+                   flat_y_pred_proba: list,
+                   cv_folds: int,
+                   embedding_label: str = "doc2vec",
+                   plot: bool = True) -> Tuple[np.ndarray, np.ndarray, float]:
     """This function computes FPR, TPR and AUC. Then, it plots the ROC curve
     Args:
-        flat_y_test (list): labels
-        flat_y_pred_proba (list): predictions
-        cv_folds (int): number of folds in the cross-validation
-        embedding_label (str): embedding algorithm that was used
-        plot (bool): if True, the ROC curve will be displayed
+        flat_y_test: labels
+        flat_y_pred_proba: predictions
+        cv_folds: number of folds in the cross-validation
+        embedding_label: embedding algorithm that was used
+        plot: if True, the ROC curve will be displayed
     """
     fpr, tpr, _ = roc_curve(flat_y_test, flat_y_pred_proba, pos_label=1)
     tpr[0] = 0.0  # ensure that first element is 0
@@ -679,7 +700,11 @@ def plot_roc_curve(flat_y_test, flat_y_pred_proba, cv_folds, embedding_label="do
     return fpr, tpr, auc_roc
 
 
-def plot_pr_curve(flat_y_test, flat_y_pred_proba, cv_folds, embedding_label="doc2vec", plot=True):
+def plot_pr_curve(flat_y_test: list,
+                  flat_y_pred_proba: list,
+                  cv_folds: int,
+                  embedding_label: str = "doc2vec",
+                  plot: bool = True) -> Tuple[np.ndarray, np.ndarray, float]:
     """This function computes precision, recall and AUPR. Then, it plots the PR curve
     Args:
         flat_y_test (list): labels
