@@ -519,7 +519,10 @@ def compute_observed_diff_aupr(y_probab_model_1, y_true, y_probab_model_2, test_
     return observed_diff
 
 
-def one_permutation_matching_labels(y_probab_model_1, y_true, y_probab_model_2, test_statistic):
+def one_permutation_matching_labels(y_probab_model_1,
+                                    y_true,
+                                    y_probab_model_2,
+                                    test_statistic):
     # mix all predictions together
     all_y_preds = y_probab_model_1 + y_probab_model_2
 
@@ -566,10 +569,14 @@ def one_permutation_matching_labels(y_probab_model_1, y_true, y_probab_model_2, 
     return permuted_difference
 
 
-def run_permutations(nb_permutations, y_probab_model_1, y_true, y_probab_model_2, test_statistic):
+def run_permutations(nb_permutations: int,
+                     y_probab_model_1: list,
+                     y_true: list,
+                     y_probab_model_2: list,
+                     test_statistic: str) -> list:
     permuted_auc_differences = []  # will contain the randomly permuted AUC values
     for i in range(nb_permutations):
-        if i % 1000 == 0:  # only print every XX permutation
+        if i % 2000 == 0:  # only print every XX permutation
             print("Permutation {}".format(i))
         one_permuted_auc_difference = one_permutation_matching_labels(y_probab_model_1, y_true, y_probab_model_2, test_statistic)
         permuted_auc_differences.append(one_permuted_auc_difference)  # append to external list
@@ -577,14 +584,14 @@ def run_permutations(nb_permutations, y_probab_model_1, y_true, y_probab_model_2
     return permuted_auc_differences
 
 
-def permutation_tests(output_dir_model1,
-                      legend_label_model1,
-                      output_dir_model2,
-                      legend_label_model2,
-                      nb_permutations,
-                      test_statistic,
-                      figure_nb,
-                      brats_inference=False):
+def permutation_tests(output_dir_model1: str,
+                      legend_label_model1: str,
+                      output_dir_model2: str,
+                      legend_label_model2: str,
+                      nb_permutations: int,
+                      test_statistic: str,
+                      figure_nb: int,
+                      brats_inference: bool = False) -> None:
 
     print("\n------------------------ {} vs. {}".format(legend_label_model1, legend_label_model2))
     print("------ test statistic: {}; nb. permutations: {}".format(test_statistic, nb_permutations))
@@ -601,25 +608,25 @@ def permutation_tests(output_dir_model1,
     assert y_true_model1 == y_true_model2, "Ground truth vectors should be identical"
 
     # compute observed difference
-    observed_aupr_difference = compute_observed_diff_aupr(y_pred_probab_model1, y_true_model1, y_pred_probab_model2, test_statistic)
+    observed_difference = compute_observed_diff_aupr(y_pred_probab_model1, y_true_model1, y_pred_probab_model2, test_statistic)
 
     # compute permuted differences
-    permuted_aupr_differences = run_permutations(nb_permutations, y_pred_probab_model1, y_true_model1, y_pred_probab_model2, test_statistic)
+    permuted_differences = run_permutations(nb_permutations, y_pred_probab_model1, y_true_model1, y_pred_probab_model2, test_statistic)
 
     # show distribution
     plt.figure(figure_nb)
-    hist = np.histogram(permuted_aupr_differences, bins=20)
-    _ = plt.hist(permuted_aupr_differences, bins=20)
+    hist = np.histogram(permuted_differences, bins=20)
+    _ = plt.hist(permuted_differences, bins=20)
     plt.title("Test statistic: {}".format(test_statistic))
 
     # add vertical line representing the observed difference
-    plt.axvline(observed_aupr_difference, 0, hist[0][int(len(hist) / 2)], linewidth=4, color="r")
+    plt.axvline(observed_difference, 0, hist[0][int(len(hist) / 2)], linewidth=4, color="r")
 
     # count number of samples above the observed value
-    count_samples_above_observed_value = (np.asarray(permuted_aupr_differences) > observed_aupr_difference).sum()
+    count_samples_above_observed_value = (np.asarray(permuted_differences) > observed_difference).sum()
 
     # compute p-value: it corresponds to the proportion of values above the observed wrt the total
-    p_value = count_samples_above_observed_value / len(permuted_aupr_differences)
+    p_value = count_samples_above_observed_value / len(permuted_differences)
 
     if p_value <= 0.05 or p_value >= 0.95:
         print("Significant difference. p-value = {}".format(p_value))
