@@ -2,9 +2,9 @@
 	"fold_to_do": 2,
 	"network": "customVGG",
 	"df_dates_and_labels_had": "/path/to/extra_files/df_dates_and_t2_labels_had.csv",
-	"had_data_path": "/path/to/T2_difference_maps/out_Mar_22_2022_manual_labels",
+	"had_data_path": "/path/to/HAD_diffmaps",
 	"out_dir": "/path/to/classification_out_dir/",
-	"wad_data_path": "/path/to/T2_difference_maps/out_Mar_24_2022_automatic_labels_also_manual_subs",
+	"wad_data_path": "/path/to/WAD_diffmaps",
 	"optuna_output_dir": "/path/to/specific_optuna_output_dir/",
 
  	"batch_size": 4,
