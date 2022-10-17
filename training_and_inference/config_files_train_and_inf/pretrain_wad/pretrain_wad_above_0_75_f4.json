@@ -2,7 +2,7 @@
 	"fold_to_do": 4,
 	"network": "customVGG",
 	"df_comparative_dates_path": "/path/to/extra_files/df_dates_and_t2_labels_wad_above_0_75.csv",
-	"input_dir": "/path/to/T2_difference_maps/out_Mar_24_2022_automatic_labels_also_manual_subs",
+	"input_dir": "/path/to/WAD_diffmaps",
 	"out_dir": "/path/to/classification_out_dir/",
 	"path_to_output_baseline_dir": "/path/to/output_dir_baseline/",
 
