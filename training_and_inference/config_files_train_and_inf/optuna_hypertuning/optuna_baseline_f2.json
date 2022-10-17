@@ -2,9 +2,9 @@
 	"fold_to_do": 2,
 	"network": "customVGG",
 	"df_dates_and_labels_had": "/path/to/extra_files/df_dates_and_t2_labels_had.csv",
-	"input_dir": "/path/to/T2_difference_maps/out_Mar_22_2022_manual_labels",
+	"input_dir": "/path/to/HAD_diffmaps",
 	"out_dir": "/path/to/classification_out_dir/",
-	"optuna_output_dir": "/path/to/optuna_out_dir/",
+	"optuna_output_dir": "/path/to/Optuna_Outputs/",
 
  	"batch_size": 4,
 	"ext_cv_folds": 5,
