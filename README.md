@@ -9,7 +9,7 @@ This repository contains the code used for the [paper](add_link):
 "Transfer learning with weak labels from radiology reports: application to glioma change detection". Please cite the paper if you are using either our code or one of our labeled datasets (in-house or BRATS-2015).
 
 ## Data
-You can find the data used for this project at www.smth.com, and the corresponding longitudinal labels inside the dataframes located in the [extra_files](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files) directory. The column of interest for the labels is "t2_label". Remember that 0=stable difference map, while 1=unstable difference map.
+You can find the data used for this project at [this Zenodo link](https://zenodo.org/record/7214605#.Y05Ug3VBzIE), and the corresponding longitudinal labels inside the dataframes located in the [extra_files](https://github.com/connectomicslab/Glioma_Change_Detection_T2w/tree/master/extra_files) directory. The column of interest for the labels is "t2_label". Remember that 0=stable difference map, while 1=unstable difference map.
 
 ## Installation & conda environment
 1) Clone the repository
