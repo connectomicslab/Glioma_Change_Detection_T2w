@@ -5,7 +5,7 @@
 </p>
 
 
-This repository contains the code used for the [paper](add_link): 
+This repository contains the code used for the [paper](https://arxiv.org/abs/2210.09698): 
 "Transfer learning with weak labels from radiology reports: application to glioma change detection". Please cite the paper if you are using either our code or one of our labeled datasets (in-house or BRATS-2015).
 
 ## Data
